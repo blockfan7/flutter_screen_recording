@@ -14,6 +14,7 @@ var audioInput:AVAssetWriterInput!
 var videoWriterInput : AVAssetWriterInput?
 var nameVideo: String = ""
 var recordAudio: Bool = false;
+var waitTime: Int = 0;
 var myResult: FlutterResult?
     
   public static func register(with registrar: FlutterPluginRegistrar) {
@@ -30,7 +31,11 @@ var myResult: FlutterResult?
          
          self.recordAudio = (args?["audio"] as? Bool)!
          self.nameVideo = (args?["name"] as? String)!+".mp4"
-         startRecording()
+         self.waitTime = (args?["waitTime"] as? Int)!
+         DispatchQueue.main.asyncAfter(deadline: .now() + self.waitTime) {
+            startRecording()
+        }
+         
 
     }else if(call.method == "stopRecordScreen"){
         if(videoWriter != nil){
@@ -57,7 +62,9 @@ var myResult: FlutterResult?
         } catch {
             
         }
-
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // Change `2.0` to the desired number of seconds.
+            // Code you want to be delayed
+        }
         do {
             try videoWriter = AVAssetWriter(outputURL: videoOutputURL!, fileType: AVFileType.mp4)
         } catch let writerError as NSError {

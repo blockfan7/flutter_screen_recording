@@ -18,9 +18,10 @@ dev_dependencies:
     sdk: flutter
   permission_handler: ^4.1.0
   open_file: ^3.0.1
-
+  quiver: ^2.1.3
   flutter_screen_recording:
-    path: ../
+    git:
+      url: https://github.com/blockfan7/flutter_screen_recording.git
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

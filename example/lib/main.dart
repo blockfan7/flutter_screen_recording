@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screen_recording/flutter_screen_recording.dart';
@@ -91,9 +92,11 @@ class _MyAppState extends State<MyApp> {
     bool start = false;
 
     if (audio) {
-      start = await FlutterScreenRecording.startRecordScreenAndAudio("Title");
+      start = await FlutterScreenRecording.startRecordScreenAndAudio("Title",
+          waitTime: 5);
     } else {
-      start = await FlutterScreenRecording.startRecordScreen("Title");
+      start =
+          await FlutterScreenRecording.startRecordScreen("Title", waitTime: 5);
     }
 
     if (start) {
@@ -110,6 +113,10 @@ class _MyAppState extends State<MyApp> {
     });
     print("Opening video");
     print(path);
-    OpenFile.open(path);
+//    OpenFile.open(path);
+    File screenFile = File(path);
+    var aux = await screenFile.delete();
+    print("aux");
+    print(aux);
   }
 }
