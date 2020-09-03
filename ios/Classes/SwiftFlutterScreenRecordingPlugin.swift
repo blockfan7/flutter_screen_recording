@@ -14,7 +14,6 @@ var audioInput:AVAssetWriterInput!
 var videoWriterInput : AVAssetWriterInput?
 var nameVideo: String = ""
 var recordAudio: Bool = false;
-var waitTime: Int = 0;
 var myResult: FlutterResult?
     
   public static func register(with registrar: FlutterPluginRegistrar) {
@@ -31,8 +30,7 @@ var myResult: FlutterResult?
          
          self.recordAudio = (args?["audio"] as? Bool)!
          self.nameVideo = (args?["name"] as? String)!+".mp4"
-         self.waitTime = (args?["waitTime"] as? Int)!
-         DispatchQueue.main.asyncAfter(deadline: .now() + self.waitTime) {
+         DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
             startRecording()
         }
          

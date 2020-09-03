@@ -92,11 +92,9 @@ class _MyAppState extends State<MyApp> {
     bool start = false;
 
     if (audio) {
-      start = await FlutterScreenRecording.startRecordScreenAndAudio("Title",
-          waitTime: 5);
+      start = await FlutterScreenRecording.startRecordScreenAndAudio("Title");
     } else {
-      start =
-          await FlutterScreenRecording.startRecordScreen("Title", waitTime: 5);
+      start = await FlutterScreenRecording.startRecordScreen("Title");
     }
 
     if (start) {

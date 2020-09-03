@@ -72,11 +72,9 @@ packages:
   flutter_screen_recording:
     dependency: "direct dev"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "29b6d19b0544be1eb55971cacef9a9649d0cdc5f"
-      url: "https://github.com/blockfan7/flutter_screen_recording.git"
-    source: git
+      path: ".."
+      relative: true
+    source: path
     version: "1.0.10"
   flutter_test:
     dependency: "direct dev"
