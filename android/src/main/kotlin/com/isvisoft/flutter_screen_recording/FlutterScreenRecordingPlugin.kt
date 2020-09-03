@@ -62,12 +62,18 @@ class FlutterScreenRecordingPlugin(
 
         if (requestCode == SCREEN_RECORD_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                Thread.sleep(3500)
-                mMediaProjectionCallback = MediaProjectionCallback()
-                mMediaProjection = mProjectionManager?.getMediaProjection(resultCode, data)
-                mMediaProjection?.registerCallback(mMediaProjectionCallback, null)
-                mVirtualDisplay = createVirtualDisplay()
-                _result.success(true)
+                
+                Handler().postDelayed(
+                    {
+                        mMediaProjectionCallback = MediaProjectionCallback()
+                        mMediaProjection = mProjectionManager?.getMediaProjection(resultCode, data)
+                        mMediaProjection?.registerCallback(mMediaProjectionCallback, null)
+                        mVirtualDisplay = createVirtualDisplay()
+                        _result.success(true)
+                        
+                    },
+                    3500 // value in milliseconds
+                )
                 return true
             } else {
                 _result.success(false)
