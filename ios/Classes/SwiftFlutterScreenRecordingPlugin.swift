@@ -32,7 +32,7 @@ var myResult: FlutterResult?
          self.recordAudio = (args?["audio"] as? Bool)!
          self.nameVideo = (args?["name"] as? String)!+".mp4"
 
-         DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             startRecording()
         }       
 
