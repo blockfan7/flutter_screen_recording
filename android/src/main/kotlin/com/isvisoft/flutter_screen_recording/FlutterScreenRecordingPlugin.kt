@@ -155,27 +155,28 @@ class FlutterScreenRecordingPlugin(
 
     fun startRecordScreen() {
         try {
-            mMediaRecorder?.setVideoSource(MediaRecorder.VideoSource.SURFACE)
-            if (recordAudio!!) {
-                mMediaRecorder?.setAudioSource(MediaRecorder.AudioSource.MIC);
-                mMediaRecorder?.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-                mMediaRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-            } else {
-                mMediaRecorder?.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
-            }
-            mMediaRecorder?.setOutputFile("${storePath}${videoName}.mp4")
+           
+             (Handler()).postDelayed({   
+                  mMediaRecorder?.setVideoSource(MediaRecorder.VideoSource.SURFACE)
+                    if (recordAudio!!) {
+                        mMediaRecorder?.setAudioSource(MediaRecorder.AudioSource.MIC);
+                        mMediaRecorder?.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+                        mMediaRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+                    } else {
+                        mMediaRecorder?.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
+                    }
+                    mMediaRecorder?.setOutputFile("${storePath}${videoName}.mp4")
 
-            val rotation = (registrar.activity().getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay.orientation
-            mMediaRecorder?.setOrientationHint(rotation * 90)
+                    val rotation = (registrar.activity().getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay.orientation
+                    mMediaRecorder?.setOrientationHint(rotation * 90)
 
-            mMediaRecorder?.setVideoSize(mDisplayWidth, mDisplayHeight)
-            mMediaRecorder?.setVideoEncoder(MediaRecorder.VideoEncoder.H264)
-            mMediaRecorder?.setVideoEncodingBitRate(5 * mDisplayWidth * mDisplayHeight)
-            mMediaRecorder?.setVideoFrameRate(60)
+                    mMediaRecorder?.setVideoSize(mDisplayWidth, mDisplayHeight)
+                    mMediaRecorder?.setVideoEncoder(MediaRecorder.VideoEncoder.H264)
+                    mMediaRecorder?.setVideoEncodingBitRate(5 * mDisplayWidth * mDisplayHeight)
+                    mMediaRecorder?.setVideoFrameRate(60)
 
 
-            mMediaRecorder?.prepare()
-             (Handler()).postDelayed({            
+                    mMediaRecorder?.prepare()         
                 mMediaRecorder?.start()
             }
             , 5000);
