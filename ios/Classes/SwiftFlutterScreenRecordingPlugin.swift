@@ -14,6 +14,7 @@ var audioInput:AVAssetWriterInput!
 var videoWriterInput : AVAssetWriterInput?
 var nameVideo: String = ""
 var recordAudio: Bool = false;
+
 var myResult: FlutterResult?
     
   public static func register(with registrar: FlutterPluginRegistrar) {
@@ -30,10 +31,10 @@ var myResult: FlutterResult?
          
          self.recordAudio = (args?["audio"] as? Bool)!
          self.nameVideo = (args?["name"] as? String)!+".mp4"
+
          DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
             startRecording()
-        }
-         
+        }       
 
     }else if(call.method == "stopRecordScreen"){
         if(videoWriter != nil){

@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -6,6 +5,7 @@ import 'package:flutter_screen_recording/flutter_screen_recording.dart';
 import 'package:quiver/async.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:open_file/open_file.dart';
+import 'package:video_player/video_player.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,8 +15,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  String fileName = "";
   bool recording = false;
   int _time = 0;
+  VideoPlayerController _controller;
 
   requestPermissions() async {
     await PermissionHandler().requestPermissions([
@@ -108,13 +110,17 @@ class _MyAppState extends State<MyApp> {
     String path = await FlutterScreenRecording.stopRecordScreen;
     setState(() {
       recording = !recording;
+      fileName = path;
     });
+
     print("Opening video");
     print(path);
-//    OpenFile.open(path);
-    File screenFile = File(path);
-    var aux = await screenFile.delete();
+
+    OpenFile.open(path);
+
+    // _controller = VideoPlayerController.file(File(path));
+//    File screenFile = File(path);
+//    var aux = await screenFile.delete();
     print("aux");
-    print(aux);
   }
 }
