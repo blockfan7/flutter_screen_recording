@@ -62,12 +62,13 @@ class FlutterScreenRecordingPlugin(
 
         if (requestCode == SCREEN_RECORD_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-               
+                (Handler()).postDelayed({
                     mMediaProjectionCallback = MediaProjectionCallback()
                     mMediaProjection = mProjectionManager?.getMediaProjection(resultCode, data)
                     mMediaProjection?.registerCallback(mMediaProjectionCallback, null)
                     mVirtualDisplay = createVirtualDisplay()
-               
+                }
+                , 5000);
                 Log.e("--crash--", "ok button clicked")
                 Log.e("--crash--", "start wait")
                 Log.e("--crash--", "wait finished")
