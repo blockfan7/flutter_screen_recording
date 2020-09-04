@@ -190,7 +190,18 @@ class FlutterScreenRecordingPlugin(
 
         val permissionIntent = mProjectionManager?.createScreenCaptureIntent()
 //        ActivityCompat.startActivityForResult((registrar.context().applicationContext as FlutterApplication).currentActivity, permissionIntent!!, SCREEN_RECORD_REQUEST_CODE, null)
+try{
         ActivityCompat.startActivityForResult(registrar.activity(), permissionIntent!!, SCREEN_RECORD_REQUEST_CODE, null)
+}catch{
+            Thread.sleep(500) 
+                mMediaProjectionCallback = MediaProjectionCallback()
+                mMediaProjection = mProjectionManager?.getMediaProjection(resultCode, data)
+                mMediaProjection?.registerCallback(mMediaProjectionCallback, null)
+                mVirtualDisplay = createVirtualDisplay()
+                _result.success(true)
+
+}
+    
         Log.e("--crash--", "dialog opened")
     }
 
