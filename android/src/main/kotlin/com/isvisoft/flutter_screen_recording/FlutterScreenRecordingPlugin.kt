@@ -68,7 +68,7 @@ class FlutterScreenRecordingPlugin(
                     mMediaProjection?.registerCallback(mMediaProjectionCallback, null)
                     mVirtualDisplay = createVirtualDisplay()
                 }
-                , 3500);
+                , 5000);
                 Log.e("--crash--", "ok button clicked")
                 Log.e("--crash--", "start wait")
                 Log.e("--crash--", "wait finished")
