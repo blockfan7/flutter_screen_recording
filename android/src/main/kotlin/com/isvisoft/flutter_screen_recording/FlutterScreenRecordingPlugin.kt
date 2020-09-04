@@ -73,7 +73,7 @@ class FlutterScreenRecordingPlugin(
                 // Log.e("--crash--", "start wait")
                 // Log.e("--crash--", "wait finished")
 
-                Thread.sleep(1000) 
+                Thread.sleep(500) 
                 mMediaProjectionCallback = MediaProjectionCallback()
                     mMediaProjection = mProjectionManager?.getMediaProjection(resultCode, data)
                     mMediaProjection?.registerCallback(mMediaProjectionCallback, null)
