@@ -61,29 +61,24 @@ class FlutterScreenRecordingPlugin(
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
 
         if (requestCode == SCREEN_RECORD_REQUEST_CODE) {
-            // if (resultCode == Activity.RESULT_OK) {
-            //     // (Handler()).postDelayed({
-            //     //     mMediaProjectionCallback = MediaProjectionCallback()
-            //     //     mMediaProjection = mProjectionManager?.getMediaProjection(resultCode, data)
-            //     //     mMediaProjection?.registerCallback(mMediaProjectionCallback, null)
-            //     //     mVirtualDisplay = createVirtualDisplay()
-            //     // }
-            //     // , 1000);
-            //     // Log.e("--crash--", "ok button clicked")
-            //     // Log.e("--crash--", "start wait")
-            //     // Log.e("--crash--", "wait finished")
-
-                Thread.sleep(500) 
-                mMediaProjectionCallback = MediaProjectionCallback()
-                mMediaProjection = mProjectionManager?.getMediaProjection(resultCode, data)
-                mMediaProjection?.registerCallback(mMediaProjectionCallback, null)
-                mVirtualDisplay = createVirtualDisplay()
+            if (resultCode == Activity.RESULT_OK) {
+                (Handler()).postDelayed({
+                    mMediaProjectionCallback = MediaProjectionCallback()
+                    mMediaProjection = mProjectionManager?.getMediaProjection(resultCode, data)
+                    mMediaProjection?.registerCallback(mMediaProjectionCallback, null)
+                    mVirtualDisplay = createVirtualDisplay()
+                }
+                , 500);
+                Log.e("--crash--", "ok button clicked")
+                Log.e("--crash--", "start wait")
+                Log.e("--crash--", "wait finished")
+                
                 _result.success(true)
                 return true
-            // } else {
-            //     Log.e("--crash--", "cancel clicked")
-            //     _result.success(false)
-            // }
+            } else {
+                Log.e("--crash--", "cancel clicked")
+                _result.success(false)
+            }
         }
 
         return false
@@ -190,18 +185,7 @@ class FlutterScreenRecordingPlugin(
 
         val permissionIntent = mProjectionManager?.createScreenCaptureIntent()
 //        ActivityCompat.startActivityForResult((registrar.context().applicationContext as FlutterApplication).currentActivity, permissionIntent!!, SCREEN_RECORD_REQUEST_CODE, null)
-try{
         ActivityCompat.startActivityForResult(registrar.activity(), permissionIntent!!, SCREEN_RECORD_REQUEST_CODE, null)
-}catch{
-            Thread.sleep(500) 
-                mMediaProjectionCallback = MediaProjectionCallback()
-                mMediaProjection = mProjectionManager?.getMediaProjection(resultCode, data)
-                mMediaProjection?.registerCallback(mMediaProjectionCallback, null)
-                mVirtualDisplay = createVirtualDisplay()
-                _result.success(true)
-
-}
-    
         Log.e("--crash--", "dialog opened")
     }
 
